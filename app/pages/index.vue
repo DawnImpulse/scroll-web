@@ -1,18 +1,13 @@
-<template>
-  <div class="flex flex-col items-center justify-center gap-4 h-screen">
-    <h1 class="font-bold text-2xl text-(--ui-primary)">
-      Nuxt UI v3
-    </h1>
+<script setup lang="ts">
+import WebsiteHero from "~/components/website/WebsiteHero.vue";
+</script>
 
-    <div class="flex items-center gap-2">
-      <UButton
-        label="GitHub"
-        color="neutral"
-        variant="outline"
-        icon="mdi:account-circle"
-        to="https://github.com/nuxt/ui"
-        target="_blank"
-      />
+<template>
+    <div class="h-screen w-screen flex justify-center">
+        <div class="w-full lg:w-10/12 2xl:w-8/12">
+            <WebsiteHero />
+        </div>
     </div>
-  </div>
 </template>
+
+<style scoped></style>
