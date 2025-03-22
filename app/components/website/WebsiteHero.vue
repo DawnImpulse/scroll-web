@@ -1,5 +1,22 @@
 <script setup lang="ts">
-const items = ["is lost", "got no battery", "got stolen", "gets locked out"];
+const items = [
+    {
+        text: "is lost",
+        color: "bg-blue-600 text-white",
+    },
+    {
+        text: "got no battery",
+        color: "bg-rose-600 text-white",
+    },
+    {
+        text: "got stolen",
+        color: "bg-green-600 text-white",
+    },
+    {
+        text: "gets locked out",
+        color: "bg-purple-600 text-white",
+    },
+];
 const visible = ref(0);
 
 // Timeout function
@@ -18,7 +35,7 @@ const timeout = (ms: any) => new Promise((resolve) => setTimeout(resolve, ms));
 </script>
 
 <template>
-    <div class="w-full h-full flex flex-col justify-between">
+    <div class="w-full h-full flex flex-col justify-between items-center">
         <!--toolbar-->
         <div class="w-full mt-4 flex flex-row items-center">
             <!--title-->
@@ -31,8 +48,8 @@ const timeout = (ms: any) => new Promise((resolve) => setTimeout(resolve, ms));
             <UButton
                 class="ml-8"
                 icon="mdi:github"
-                variant="soft"
-                color="neutral"
+                variant="outline"
+                color="secondary"
             >
                 Github
             </UButton>
@@ -44,16 +61,20 @@ const timeout = (ms: any) => new Promise((resolve) => setTimeout(resolve, ms));
         </div>
 
         <!--text-->
-        <div class="pt-16 pl-32 flex flex-col text-4xl">
-            <div>A simple way to access your contacts</div>
+        <div
+            class="mb-32 pt-16 pl-32 flex flex-col text-5xl font-bold text-black"
+        >
+            <div class="">A simple way to access your contacts</div>
             <div class="flex flex-row">
-                <div>when your phone</div>
-                <div v-for="(item, key) in items" class="ml-1">
+                <div class="mt-6 mr-2">when your phone</div>
+                <div v-for="(item, key) in items" class="mt-4">
                     <div
                         v-if="key === visible"
-                        class="font-bold tracking-wider motion-preset-slide-up-lg text-green-700"
+                        :class="`font-bold tracking-wider ${item.color} rounded-xl`"
                     >
-                        {{ item }}
+                        <div :class="`py-2 px-8 motion-preset-bounce`">
+                            {{ item.text }}
+                        </div>
                     </div>
                 </div>
             </div>
