@@ -32,10 +32,25 @@ const timeout = (ms: any) => new Promise((resolve) => setTimeout(resolve, ms));
         await timeout(2000);
     }
 })();
+
+onMounted(() => {
+    // hide element on scroll
+    window.addEventListener("scroll", () => {
+        const element = document.getElementById("bouncer");
+        if (window.scrollY > 100) {
+            // Adjust scroll threshold as needed
+            element?.classList.add("opacity-0");
+            element?.classList.add("pointer-events-none");
+        } else {
+            element?.classList.remove("opacity-0");
+            element?.classList.remove("pointer-events-none");
+        }
+    });
+});
 </script>
 
 <template>
-    <div class="w-full h-full flex flex-col justify-between items-center">
+    <div class="w-full h-screen flex flex-col justify-between items-center">
         <!--toolbar-->
         <div class="w-full mt-4 flex flex-row items-center">
             <!--title-->
@@ -60,6 +75,8 @@ const timeout = (ms: any) => new Promise((resolve) => setTimeout(resolve, ms));
             </UButton>
         </div>
 
+        <div class="flex-grow" />
+
         <!--text-->
         <div
             class="mb-32 pt-16 pl-32 flex flex-col text-5xl font-bold text-black"
@@ -80,7 +97,14 @@ const timeout = (ms: any) => new Promise((resolve) => setTimeout(resolve, ms));
             </div>
         </div>
 
-        <div></div>
+        <div class="flex-grow" />
+        <div id="bouncer" class="pb-16">
+            <Icon
+                name="ic:baseline-keyboard-double-arrow-down"
+                class="animate-bounce"
+                size="30"
+            />
+        </div>
     </div>
 </template>
 
