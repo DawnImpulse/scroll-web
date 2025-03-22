@@ -11,6 +11,7 @@ import WebsiteInfo from "~/components/website/WebsiteInfo.vue";
             <div class="flex flex-col w-full lg:w-10/12 2xl:w-8/12">
                 <WebsiteHero class="h-screen" />
                 <WebsiteInfo />
+                <WebsiteFooter />
             </div>
         </div>
     </div>
