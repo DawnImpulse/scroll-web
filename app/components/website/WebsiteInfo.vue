@@ -42,6 +42,16 @@ const data = [
             title: "text-black-600",
         },
     },
+    {
+        title: "Encrypted",
+        description: "Complete end-to-end encryption of all your data",
+        icon: "material-symbols:lock-open-circle",
+        color: {
+            icon: "text-red-500",
+            border: "border-red-500",
+            title: "text-red-600",
+        },
+    },
 ];
 </script>
 
