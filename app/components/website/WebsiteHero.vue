@@ -52,7 +52,7 @@ onMounted(() => {
 <template>
     <div class="w-full h-screen flex flex-col justify-between items-center">
         <!--toolbar-->
-        <div class="w-full mt-4 flex flex-row items-center">
+        <div class="w-full px-4 mt-4 flex flex-row items-center">
             <!--title-->
             <div class="flex flex-row items-center">
                 <img src="@/assets/icons/logo.svg" class="size-12" alt="" />
@@ -79,12 +79,16 @@ onMounted(() => {
 
         <!--text-->
         <div
-            class="mb-32 pt-16 pl-32 flex flex-col text-5xl font-bold text-black"
+            class="mb-32 pt-16 pl-8 lg:pl-32 flex flex-col text-3xl lg:text-5xl font-bold text-black"
         >
-            <div class="">A simple way to access your contacts</div>
-            <div class="flex flex-row">
-                <div class="mt-6 mr-2">when your phone</div>
-                <div v-for="(item, key) in items" class="mt-4">
+            <div class="text-center lg:text-left">
+                A simple way to access your contacts
+            </div>
+            <div class="flex flex-col lg:flex-row items-center">
+                <div class="mt-4 lg:mt-6 mr-2 text-center lg:text-left">
+                    when your phone
+                </div>
+                <div v-for="(item, key) in items" class="mt-4 w-fit">
                     <div
                         v-if="key === visible"
                         :class="`font-bold tracking-wider ${item.color} rounded-xl`"

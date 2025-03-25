@@ -56,18 +56,18 @@ const data = [
 </script>
 
 <template>
-    <div class="h-screen">
+    <div>
         <div class="flex flex-col items-center">
             <!--title-->
             <div
-                class="text-8xl underline underline-offset-8 decoration-dotted text-black"
+                class="text-4xl md:text-6xl lg:text-8xl underline underline-offset-8 decoration-dotted text-black"
             >
                 Features
             </div>
 
             <!--grid-->
             <div
-                class="w-full mt-48 gap-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4"
+                class="mt-16 md:mt-24 lg:mt-36 px-4 md:px-16 gap-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4"
             >
                 <div
                     :class="`bg-white h-48 px-4 py-4 rounded-2xl border-4 ${item.color.border}`"
@@ -81,20 +81,20 @@ const data = [
                                 :class="`${item.color.icon}`"
                             />
                             <div
-                                :class="`ml-4 text-2xl font-bold ${item.color.title}`"
+                                :class="`pl-4 text-2xl font-bold ${item.color.title}`"
                             >
                                 {{ item.title }}
                             </div>
                         </div>
-                        <div class="mt-4">{{ item.description }}</div>
+                        <div class="pt-4">{{ item.description }}</div>
                     </div>
                 </div>
             </div>
 
             <!--app-->
             <UButton
-                class="mt-48 px-16 py-4 rounded-xl animate-bounce"
-                color="neutral"
+                class="mt-24 px-16 py-4 rounded-xl shadow-2xl shadow-cyan-600"
+                color="primary"
             >
                 Go to App
             </UButton>

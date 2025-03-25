@@ -5,13 +5,13 @@ import WebsiteInfo from "~/components/website/WebsiteInfo.vue";
 
 <template>
     <div>
-        <BgAnimatedCircles class="absolute w-screen h-screen" />
+        <BgAnimated2 class="absolute w-screen blur-lg" />
 
         <div class="absolute w-screen flex justify-center">
-            <div class="flex flex-col w-full lg:w-10/12 2xl:w-8/12">
+            <div class="flex flex-col lg:w-10/12 2xl:w-8/12">
                 <WebsiteHero class="h-screen" />
                 <WebsiteInfo />
-                <WebsiteFooter />
+                <WebsiteFooter class="mt-32 mb-8" />
             </div>
         </div>
     </div>
