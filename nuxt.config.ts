@@ -10,4 +10,9 @@ export default defineNuxtConfig({
     devServer: {
         port: 3131,
     },
+    runtimeConfig: {
+        public: {
+            backend: process.env.PB_HOST,
+        },
+    },
 });
