@@ -5,7 +5,7 @@ export default defineNuxtConfig({
         compatibilityVersion: 4,
     },
     devtools: { enabled: true },
-    modules: ["@nuxt/ui", "@nuxt/icon"],
+    modules: ["@nuxt/ui-pro", "@nuxt/icon"],
     css: ["~/assets/css/main.css"],
     devServer: {
         port: 3131,
