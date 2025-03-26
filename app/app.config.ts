@@ -2,9 +2,9 @@ export default defineAppConfig({
     // https://ui3.nuxt.dev/getting-started/theme#design-system
     ui: {
         colors: {
-            primary: "cyan",
-            secondary: "black",
-            neutral: "slate",
+            // primary: "cyan",
+            // secondary: "",
+            // neutral: "slate",
         },
         button: {
             defaultVariants: {

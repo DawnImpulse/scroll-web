@@ -64,7 +64,7 @@ onMounted(() => {
                 class="ml-8"
                 icon="mdi:github"
                 variant="outline"
-                color="secondary"
+                color="neutral"
             >
                 Github
             </UButton>
