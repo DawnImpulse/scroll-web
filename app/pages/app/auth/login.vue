@@ -5,13 +5,23 @@ import {
     sendEmailVerification,
 } from "firebase/auth";
 
-const layout = ref(0);
 const toast = useToast();
+const auth = useFirebaseAuth();
+
+// ----- variables -----
+const layout = ref(0);
+const loadingLogin = ref(false);
 
 // ----- auth state -----
-const auth = useFirebaseAuth();
 const user = await getCurrentUser();
-if (user) await navigateTo("/app");
+const verified = user?.verified || false;
+if (user) {
+    if (verified) await navigateTo("/app");
+    else {
+        layout.value = 1;
+        sendVerificationEmail(user);
+    }
+}
 
 /**
  * send user verification email
@@ -19,11 +29,20 @@ if (user) await navigateTo("/app");
  */
 async function sendVerificationEmail(user: any) {
     try {
+        // send verification email
         await sendEmailVerification(user);
-        console.log("Verification email sent!");
+        toast.add({
+            title: "Thank you for joining us",
+            description:
+                "Kindly verify your email once before continuing; check your inbox :)",
+        });
+        //  listen to auth changes
+        await waitForVerification();
     } catch (error) {
-        console.error("Error sending verification email:", error);
-        throw error; // Propagate the error for handling
+        toast.add({
+            title: "Something went wrong",
+            description: "Error sending verification email: " + error,
+        });
     }
 }
 
@@ -31,22 +50,35 @@ async function sendVerificationEmail(user: any) {
  * wait for user verification
  */
 async function waitForVerification() {
-    return new Promise((resolve, reject) => {
-        const unsubscribe = onAuthStateChanged(
-            auth!!,
-            (currentUser) => {
-                if (currentUser && currentUser.emailVerified) {
-                    console.log("Email verified!");
-                    unsubscribe(); // Stop listening for changes
-                    resolve(currentUser); // Resolve with the verified user
-                } else if (!currentUser) {
-                    unsubscribe(); // Stop listening if user logs out
-                    reject(new Error("User logged out before verification"));
-                }
-            },
-            reject,
-        ); // Reject on error
-    });
+    const unsubscribe = onAuthStateChanged(
+        auth!!,
+        (currentUser) => {
+            // user is verified
+            if (currentUser && currentUser.emailVerified) {
+                console.log("Email verified!");
+                unsubscribe(); // unsubscribe to listener
+                toast.add({
+                    title: "Thank you verification",
+                    description: "You can now enjoy the app uninterrupted :)",
+                });
+                navigateTo("/app"); // navigate to app
+            }
+            // in-case user logs out (not happening)
+            else if (!currentUser) {
+                unsubscribe(); // unsubscribe to listener
+                toast.add({
+                    title: "User logged out",
+                });
+                navigateTo("/app/auth/login"); // navigate to login page
+            }
+        },
+        (err) => {
+            toast.add({
+                title: "Something went wrong",
+                description: err.toString(),
+            });
+        },
+    ); // Reject on error
 }
 
 /**
@@ -56,6 +88,9 @@ async function waitForVerification() {
  */
 async function registerAndVerify(email: string, pin: string[]) {
     try {
+        loadingLogin.value = true; // set loading button on login component
+
+        // create user
         const userCredential = await createUserWithEmailAndPassword(
             auth!!,
             email,
@@ -63,20 +98,19 @@ async function registerAndVerify(email: string, pin: string[]) {
         );
         const user = userCredential.user;
 
+        // set variables on success
+        loadingLogin.value = false;
+        layout.value = 1;
+
+        // send verification
         await sendVerificationEmail(user);
-        alert("Verification email sent. Please check your inbox.");
-
-        const verifiedUser = await waitForVerification();
-        alert("Email verified. Proceeding...");
-
-        // Proceed with your application logic after verification
-        return verifiedUser; // Return the verified user if needed
     } catch (error) {
         toast.add({
             title: "Something went wrong !!",
             description:
                 "Registration or verification failed. Please try again",
         });
+        loadingLogin.value = false;
         throw error;
     }
 }
@@ -92,9 +126,12 @@ async function registerAndVerify(email: string, pin: string[]) {
             >
                 <AuthLogin
                     v-if="layout === 0"
+                    :loading="loadingLogin"
                     @register="registerAndVerify"
                     @login=""
                 />
+
+                <AuthVerify v-else />
             </div>
         </div>
     </div>
