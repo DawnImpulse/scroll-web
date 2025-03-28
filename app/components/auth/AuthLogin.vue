@@ -66,7 +66,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
             hence it can't be changed ever
         </div>
 
-        <UButton size="xl" type="submit" class="w-full">
+        <UButton size="xl" type="submit" class="w-full" :loading="loading">
             <div class="flex flex-row items-center w-full">
                 <div class="text-sm">NEXT</div>
                 <div class="grow" />
