@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import { z } from "zod";
 import type { FormSubmitEvent } from "#ui/types";
+import { fetchSignInMethodsForEmail } from "@firebase/auth";
 // ----- props -----
-const toast = useToast();
 const auth = useFirebaseAuth();
-defineEmits(["verifyEmail", "loggedIn"]);
+const emits = defineEmits(["register", "login"]);
+const props = defineProps(["loading"]);
 
 // ----- schema -----
 const schema = z.object({
@@ -14,7 +15,6 @@ const schema = z.object({
 type Schema = z.output<typeof schema>;
 
 // ----- variables ------
-const loading = ref(false);
 const state = reactive<Partial<Schema>>({
     email: undefined,
     pin: undefined,
@@ -24,7 +24,18 @@ const state = reactive<Partial<Schema>>({
  * on submit on form
  * @param event
  */
-async function onSubmit(event: FormSubmitEvent<Schema>) {}
+async function onSubmit(event: FormSubmitEvent<Schema>) {
+    const signInMethods = await fetchSignInMethodsForEmail(
+        auth!!,
+        event.data.email,
+    );
+
+    // user exists
+    if (signInMethods && signInMethods.length > 0) {
+    }
+    // register user (redirect to verify email)
+    else emits("register", event.data.email, event.data.pin);
+}
 </script>
 
 <template>
