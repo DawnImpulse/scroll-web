@@ -56,6 +56,9 @@ onMounted(() => {
             <!--title-->
             <div class="flex flex-row items-center">
                 <img src="@/assets/icons/logo.svg" class="size-12" alt="" />
+                <div class="ml-4 font-bold text-xl text-black tracking-wider">
+                    Scroll
+                </div>
             </div>
             <div class="flex-grow" />
 
@@ -85,10 +88,10 @@ onMounted(() => {
                 A simple way to access your contacts
             </div>
             <div class="flex flex-col lg:flex-row items-center">
-                <div class="mt-4 lg:mt-6 mr-2 text-center lg:text-left">
+                <div class="mt-4 lg:mt-6 mr-2 mb-4 text-center lg:text-left">
                     when your phone
                 </div>
-                <div v-for="(item, key) in items" class="mt-4 w-fit">
+                <div v-for="(item, key) in items" class="lg:mt-4 w-fit">
                     <div
                         v-if="key === visible"
                         :class="`font-bold tracking-wider ${item.color} rounded-xl`"
