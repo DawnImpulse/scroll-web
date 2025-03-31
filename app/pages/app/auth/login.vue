@@ -90,7 +90,7 @@ async function registerAndVerify(email: string, pin: string[]) {
                     @login=""
                 />
 
-                <AuthVerify @resend="sendVerificationEmail" v-else />
+                <AuthVerify @resend="sendVerificationEmail(user)" v-else />
             </div>
         </div>
     </div>
