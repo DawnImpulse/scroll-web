@@ -1,4 +1,6 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+const emits = defineEmits(["resend"]);
+</script>
 
 <template>
     <!--title-->
@@ -15,6 +17,15 @@
         class="mt-8 animate-spin self-center text-(--ui-primary)"
         size="48"
     />
+    <div class="text-xs self-center">Reload page once verified</div>
+
+    <UButton
+        @click="emits('resend')"
+        class="mt-4 self-center"
+        color="secondary"
+    >
+        Send Email Again
+    </UButton>
 
     <!--logo-->
     <div class="mt-8 flex items-center self-center">
