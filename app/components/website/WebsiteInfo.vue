@@ -52,6 +52,27 @@ const data = [
             title: "text-red-600",
         },
     },
+    {
+        title: "Super Easy",
+        description: "Add only the contacts you need in case of need/emergency",
+        icon: "material-symbols:check-box",
+        color: {
+            icon: "text-stone-500",
+            border: "border-stone-500",
+            title: "text-stone-600",
+        },
+    },
+    {
+        title: "Anywhere",
+        description:
+            "You can open it on any device, yours or not, just remember to logout once done😉",
+        icon: "material-symbols:globe",
+        color: {
+            icon: "text-violet-500",
+            border: "border-violet-500",
+            title: "text-violet-600",
+        },
+    },
 ];
 </script>
 
@@ -63,6 +84,19 @@ const data = [
                 class="text-4xl md:text-6xl lg:text-8xl underline underline-offset-8 decoration-dotted text-black"
             >
                 Features
+            </div>
+
+            <!--description-->
+            <div
+                class="mt-8 text-center text-lg text-slate-800 w-11/12 md:w-10/12 lg:w-8/12"
+            >
+                The core principle of this product is to let you add your
+                emergency/known contacts so that in case of an emergency when
+                your phone is unavailable, you can easily use anyone's device,
+                open this website, login & get access to your saved contacts.
+                This is the most simplest way to do the work, which usually
+                requires you to login to google/apple account on another device
+                which is mostly not secure in stranger's device
             </div>
 
             <!--grid-->
