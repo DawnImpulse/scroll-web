@@ -13,14 +13,11 @@ const layout = ref(0);
 const loadingLogin = ref(false);
 
 // ----- auth state -----
-const user = await getCurrentUser();
-const verified = user?.verified || false;
+let user = await getCurrentUser();
+let verified = user?.emailVerified || false;
 if (user) {
     if (verified) await navigateTo("/app");
-    else {
-        layout.value = 1;
-        sendVerificationEmail(user);
-    }
+    else layout.value = 1;
 }
 
 /**
@@ -36,49 +33,12 @@ async function sendVerificationEmail(user: any) {
             description:
                 "Kindly verify your email once before continuing; check your inbox :)",
         });
-        //  listen to auth changes
-        await waitForVerification();
     } catch (error) {
         toast.add({
             title: "Something went wrong",
             description: "Error sending verification email: " + error,
         });
     }
-}
-
-/**
- * wait for user verification
- */
-async function waitForVerification() {
-    const unsubscribe = onAuthStateChanged(
-        auth!!,
-        (currentUser) => {
-            // user is verified
-            if (currentUser && currentUser.emailVerified) {
-                console.log("Email verified!");
-                unsubscribe(); // unsubscribe to listener
-                toast.add({
-                    title: "Thank you verification",
-                    description: "You can now enjoy the app uninterrupted :)",
-                });
-                navigateTo("/app"); // navigate to app
-            }
-            // in-case user logs out (not happening)
-            else if (!currentUser) {
-                unsubscribe(); // unsubscribe to listener
-                toast.add({
-                    title: "User logged out",
-                });
-                navigateTo("/app/auth/login"); // navigate to login page
-            }
-        },
-        (err) => {
-            toast.add({
-                title: "Something went wrong",
-                description: err.toString(),
-            });
-        },
-    ); // Reject on error
 }
 
 /**
@@ -111,7 +71,6 @@ async function registerAndVerify(email: string, pin: string[]) {
                 "Registration or verification failed. Please try again",
         });
         loadingLogin.value = false;
-        throw error;
     }
 }
 </script>
@@ -131,7 +90,7 @@ async function registerAndVerify(email: string, pin: string[]) {
                     @login=""
                 />
 
-                <AuthVerify v-else />
+                <AuthVerify @resend="sendVerificationEmail" v-else />
             </div>
         </div>
     </div>
