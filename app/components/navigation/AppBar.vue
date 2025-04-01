@@ -4,7 +4,7 @@ console.log(user.fullname);
 </script>
 
 <template>
-    <div class="w-full px-4 mt-4 flex flex-row items-center">
+    <div class="w-full mt-4 flex flex-row items-center">
         <!--title-->
         <div class="flex flex-row items-center">
             <img src="@/assets/icons/logo.svg" class="size-8" alt="" />
