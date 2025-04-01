@@ -1,5 +1,11 @@
 <script setup lang="ts">
 const emits = defineEmits(["resend"]);
+const disabled = ref(false);
+
+function resend() {
+    emits("resend");
+    disabled.value = true;
+}
 </script>
 
 <template>
@@ -20,9 +26,10 @@ const emits = defineEmits(["resend"]);
     <div class="text-xs self-center">Reload page once verified</div>
 
     <UButton
-        @click="emits('resend')"
+        @click="resend"
         class="mt-4 self-center"
         color="secondary"
+        :disabled="disabled"
     >
         Send Email Again
     </UButton>
