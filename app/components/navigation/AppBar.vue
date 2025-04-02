@@ -1,6 +1,7 @@
 <script setup lang="ts">
+import BtnGithub from "~/components/container/BtnGithub.vue";
+
 const user = await getCurrentUser();
-console.log(user.fullname);
 </script>
 
 <template>
@@ -14,11 +15,15 @@ console.log(user.fullname);
         </div>
         <div class="flex-grow" />
 
+        <!--github-->
+        <BtnGithub />
+
+        <!--user popup-->
         <UPopover>
             <UButton
                 icon="material-symbols:person"
                 size="md"
-                color="neutral"
+                color="secondary"
                 variant="soft"
                 class="rounded-full"
             />
