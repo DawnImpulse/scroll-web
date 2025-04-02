@@ -1,7 +1,27 @@
 <script setup lang="ts">
 import BtnGithub from "~/components/container/BtnGithub.vue";
+import { signOut } from "firebase/auth";
 
+const auth = useFirebaseAuth();
 const user = await getCurrentUser();
+const toast = useToast();
+
+function logout() {
+    signOut(auth!!)
+        .then(() => {
+            toast.add({
+                title: "Successfully logged out",
+            });
+            navigateTo("/app/auth/login");
+        })
+        .catch((error: any) => {
+            toast.add({
+                title: "Something went wrong",
+                description: error.toString(),
+                color: "error",
+            });
+        });
+}
 </script>
 
 <template>
@@ -43,7 +63,7 @@ const user = await getCurrentUser();
                                     Are you sure you want to logout?
                                 </div>
                                 <div class="flex mt-4">
-                                    <UButton color="error">
+                                    <UButton color="error" @click="logout">
                                         Yes Logout
                                     </UButton>
                                 </div>
