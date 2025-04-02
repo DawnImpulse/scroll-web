@@ -18,7 +18,13 @@ const { pending, data: items } = useDatabaseList(itemsRef);
             <AppBar />
 
             <!--add new-->
-            <ViewDialogAdd v-if="!pending" class="mt-16 w-fit self-end" />
+            <ViewDialogAdd v-if="!pending" class="mt-16 w-fit self-end">
+                <UButton
+                    icon="material-symbols:add-circle"
+                    class="px-4 py-2"
+                    label="Contact"
+                />
+            </ViewDialogAdd>
 
             <!--loading/empty-->
             <LayoutEmptyScreen
