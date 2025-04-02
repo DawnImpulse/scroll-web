@@ -1,11 +1,21 @@
 <script setup lang="ts">
 import { z } from "zod";
 import type { FormSubmitEvent } from "#ui/types";
-import { push, ref as dbRef, getDatabase } from "firebase/database";
+import { push, ref as dbRef, getDatabase, set } from "firebase/database";
 
 // ----- props -----
 const user = await getCurrentUser();
 const toast = useToast();
+const props = defineProps({
+    item: {
+        type: {
+            id: String,
+            name: String,
+            phone: Number,
+        },
+        required: false,
+    },
+});
 
 // ----- schema -----
 const schema = z.object({
@@ -16,12 +26,32 @@ type Schema = z.output<typeof schema>;
 
 // ----- variables ------
 const state = reactive<Partial<Schema>>({
-    name: undefined,
-    phone: undefined,
+    name: props.item?.name || undefined,
+    phone: props.item?.phone || undefined,
 });
+
 const loading = ref(false);
 const database = getDatabase();
 const open = ref(false);
+
+/**
+ * insert new item
+ * @param data
+ */
+async function insert(data) {
+    return push(dbRef(database, `users/${user.uid}/contacts`), data);
+}
+
+/**
+ * update existing
+ * @param data
+ */
+async function edit(data) {
+    return set(
+        dbRef(database, `users/${user.uid}/contacts/${props.item.id}`),
+        data,
+    );
+}
 
 /**
  * on submit on form
@@ -31,18 +61,19 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
     loading.value = true;
 
     try {
-        push(dbRef(database, `users/${user.uid}/contacts`), {
-            name: event.data.name,
-            phone: event.data.phone,
-        });
+        if (props.item.id) await edit(event.data);
+        else await insert(event.data);
+
         toast.add({
-            title: "Successfully added",
+            title: `Successfully ${props.item.id ? "updated" : "added"}`,
         });
 
-        // reset values
+        // reset values (only if new)
         open.value = false;
-        state.name = undefined;
-        state.phone = undefined;
+        if (!props.item.id) {
+            state.name = undefined;
+            state.phone = undefined;
+        }
     } catch (err) {
         toast.add({
             title: "Something went wrong",
@@ -58,11 +89,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
 <template>
     <div>
         <UModal :dismissible="!loading" v-model:open="open">
-            <UButton
-                icon="material-symbols:add-circle"
-                class="px-4 py-2"
-                label="Contact"
-            />
+            <slot />
 
             <template #content>
                 <div class="py-4 self-center">
