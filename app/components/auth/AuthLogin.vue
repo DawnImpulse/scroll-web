@@ -32,6 +32,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
 
     // user exists
     if (signInMethods && signInMethods.length > 0) {
+        emits("login", event.data.email, event.data.pin);
     }
     // register user (redirect to verify email)
     else emits("register", event.data.email, event.data.pin);
