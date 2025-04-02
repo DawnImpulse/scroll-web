@@ -5,7 +5,7 @@ defineProps(["loading", "empty"]);
 </script>
 
 <template>
-    <div class="flex-col">
+    <div class="flex flex-col">
         <div class="mt-12 self-center" v-if="loading">
             Loading... Please Wait
         </div>
