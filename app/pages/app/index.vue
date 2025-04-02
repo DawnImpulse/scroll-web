@@ -1,13 +1,17 @@
 <script setup lang="ts">
 import AppBar from "~/components/navigation/AppBar.vue";
-import { DotLottieVue } from "@lottiefiles/dotlottie-vue";
+import { useDatabaseList } from "vuefire";
+import { getDatabase, ref as dbRef } from "firebase/database";
+import ViewListContacts from "~/components/views/ViewListContacts.vue";
 
-const loading = ref(false);
-const empty = ref(true);
+const user = await getCurrentUser();
+const database = getDatabase();
+const itemsRef = dbRef(database, `users/${user.uid}/contacts`);
+const { pending, data: items } = useDatabaseList(itemsRef);
 </script>
 
 <template>
-    <div class="flex w-screen justify-center">
+    <div class="flex w-screen h-screen justify-center bg-zinc-50">
         <div class="flex flex-col xl:w-8/12">
             <!--appbar-->
             <AppBar />
@@ -19,11 +23,17 @@ const empty = ref(true);
             />
 
             <!--loading/empty-->
-            <LayoutAppEmptyScreen
-                v-if="loading || empty"
+            <LayoutEmptyScreen
+                v-if="pending || items.length === 0"
                 class="self-center"
-                :loading="loading"
-                :empty="empty"
+                :loading="pending"
+                :empty="items.length === 0"
+            />
+
+            <ViewListContacts
+                class="mt-16"
+                :items="items"
+                v-if="items.length > 0"
             />
         </div>
     </div>
