@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import {
     createUserWithEmailAndPassword,
-    onAuthStateChanged,
     sendEmailVerification,
+    signInWithEmailAndPassword,
 } from "firebase/auth";
 
 const toast = useToast();
@@ -69,6 +69,40 @@ async function registerAndVerify(email: string, pin: string[]) {
             title: "Something went wrong !!",
             description:
                 "Registration or verification failed. Please try again",
+            color: "error",
+        });
+        loadingLogin.value = false;
+    }
+}
+
+/**
+ * login user
+ * @param email
+ * @param pin
+ */
+async function login(email: string, pin: string[]) {
+    try {
+        loadingLogin.value = true; // set loading button on login component
+
+        // login user
+        await signInWithEmailAndPassword(
+            auth!!,
+            email,
+            await sha256(pin.join("")),
+        );
+
+        toast.add({
+            title: "Welcome Back :)",
+        });
+
+        // set variables on success
+        loadingLogin.value = false;
+        navigateTo("/app");
+    } catch (error: any) {
+        toast.add({
+            title: "Login Failed !! Please try again",
+            description: error.toString(),
+            color: "error",
         });
         loadingLogin.value = false;
     }
@@ -87,7 +121,7 @@ async function registerAndVerify(email: string, pin: string[]) {
                     v-if="layout === 0"
                     :loading="loadingLogin"
                     @register="registerAndVerify"
-                    @login=""
+                    @login="login"
                 />
 
                 <AuthVerify @resend="sendVerificationEmail(user)" v-else />
