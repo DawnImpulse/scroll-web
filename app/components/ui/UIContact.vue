@@ -3,7 +3,7 @@ defineProps(["item"]);
 </script>
 
 <template>
-    <div class="flex flex-col px-6 py-4 rounded-lg shadow-2xl bg-white">
+    <div class="flex flex-col px-6 py-4 rounded-xl shadow-2xl bg-white">
         <!--name-->
         <div>{{ item.name }}</div>
 
