@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import BtnGithub from "~/components/container/BtnGithub.vue";
+
 const items = [
     {
         text: "is lost",
@@ -63,14 +65,7 @@ onMounted(() => {
             <div class="flex-grow" />
 
             <!--github-->
-            <UButton
-                class="ml-8"
-                icon="mdi:github"
-                variant="outline"
-                color="neutral"
-            >
-                Github
-            </UButton>
+            <BtnGithub />
 
             <!--app-->
             <UButton class="ml-8" icon="material-symbols:app-badging">
