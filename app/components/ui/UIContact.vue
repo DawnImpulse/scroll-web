@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import ViewDialogAdd from "~/components/views/ViewDialogAdd.vue";
+import ViewDialogDelete from "~/components/views/ViewDialogDelete.vue";
 
 defineProps(["item"]);
 </script>
@@ -18,12 +19,14 @@ defineProps(["item"]);
 
             <!--actions-->
             <div class="flex items-center">
-                <UButton
-                    color="error"
-                    variant="ghost"
-                    icon="material-symbols:delete"
-                    size="md"
-                />
+                <ViewDialogDelete :id="item.id">
+                    <UButton
+                        color="error"
+                        variant="ghost"
+                        icon="material-symbols:delete"
+                        size="md"
+                    />
+                </ViewDialogDelete>
 
                 <ViewDialogAdd :item="item">
                     <UButton
@@ -32,7 +35,6 @@ defineProps(["item"]);
                         class="ml-4"
                         icon="material-symbols:edit"
                         size="md"
-                        @click=""
                     />
                 </ViewDialogAdd>
             </div>
