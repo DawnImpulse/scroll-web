@@ -5,7 +5,7 @@ import WebsiteInfo from "~/components/website/WebsiteInfo.vue";
 
 <template>
     <div>
-        <BgAnimated2 class="absolute w-screen blur-xl" />
+        <LayoutBgAnimated2 class="absolute w-screen blur-xl" />
 
         <div class="absolute w-screen flex justify-center">
             <div class="flex flex-col lg:w-10/12 2xl:w-8/12">
