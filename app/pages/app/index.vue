@@ -13,7 +13,7 @@ const { pending, data: items } = useDatabaseList(itemsRef);
 
 <template>
     <div class="flex w-screen h-screen justify-center bg-zinc-50">
-        <div class="flex flex-col lg:w-10/12 xl:w-8/12">
+        <div class="flex flex-col w-full px-8 lg:w-10/12 xl:w-8/12">
             <!--appbar-->
             <AppBar />
 
