@@ -74,7 +74,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
             state.name = undefined;
             state.phone = undefined;
         }
-    } catch (err) {
+    } catch (err: any) {
         toast.add({
             title: "Something went wrong",
             description: err.toString(),
