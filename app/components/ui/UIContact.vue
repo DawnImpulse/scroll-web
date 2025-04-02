@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import ViewDialogAdd from "~/components/views/ViewDialogAdd.vue";
+
 defineProps(["item"]);
 </script>
 
@@ -22,13 +24,17 @@ defineProps(["item"]);
                     icon="material-symbols:delete"
                     size="md"
                 />
-                <UButton
-                    color="neutral"
-                    variant="ghost"
-                    class="ml-4"
-                    icon="material-symbols:edit"
-                    size="md"
-                />
+
+                <ViewDialogAdd :item="item">
+                    <UButton
+                        color="neutral"
+                        variant="ghost"
+                        class="ml-4"
+                        icon="material-symbols:edit"
+                        size="md"
+                        @click=""
+                    />
+                </ViewDialogAdd>
             </div>
         </div>
     </div>
