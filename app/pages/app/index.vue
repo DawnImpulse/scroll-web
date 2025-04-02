@@ -19,18 +19,11 @@ const empty = ref(true);
             />
 
             <!--loading/empty-->
-            <div class="mt-12 self-center" v-if="loading">
-                Loading... Please Wait
-            </div>
-            <div class="mt-12 self-center" v-else-if="empty">
-                Add a new contact by clicking button on right side
-            </div>
-            <DotLottieVue
+            <LayoutAppEmptyScreen
                 v-if="loading || empty"
-                class="lg:size-96 self-center"
-                autoplay
-                loop
-                src="/lottie/loading.lottie"
+                class="self-center"
+                :loading="loading"
+                :empty="empty"
             />
         </div>
     </div>
