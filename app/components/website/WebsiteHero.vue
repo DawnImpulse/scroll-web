@@ -68,7 +68,10 @@ onMounted(() => {
             <BtnGithub />
 
             <!--app-->
-            <UButton class="ml-8" icon="material-symbols:app-badging">
+            <UButton
+                icon="material-symbols:app-badging"
+                @click="navigateTo('/app')"
+            >
                 Go to App
             </UButton>
         </div>
