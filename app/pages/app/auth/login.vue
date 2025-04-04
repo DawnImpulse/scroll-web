@@ -7,6 +7,7 @@ import {
 
 const toast = useToast();
 const auth = useFirebaseAuth();
+const key = useCookie("key");
 
 // ----- variables -----
 const layout = ref(0);
@@ -51,11 +52,13 @@ async function registerAndVerify(email: string, pin: string[]) {
         loadingLogin.value = true; // set loading button on login component
 
         // create user
+        const hashed = await sha256(pin.join(""));
         const userCredential = await createUserWithEmailAndPassword(
             auth!!,
             email,
-            await sha256(pin.join("")),
+            hashed,
         );
+        key.value = hashed; // set cookie value
         const user = userCredential.user;
 
         // set variables on success
@@ -85,11 +88,9 @@ async function login(email: string, pin: string[]) {
         loadingLogin.value = true; // set loading button on login component
 
         // login user
-        await signInWithEmailAndPassword(
-            auth!!,
-            email,
-            await sha256(pin.join("")),
-        );
+        const hashed = await sha256(pin.join(""));
+        await signInWithEmailAndPassword(auth!!, email, hashed);
+        key.value = hashed; // set cookie value
 
         toast.add({
             title: "Welcome Back :)",

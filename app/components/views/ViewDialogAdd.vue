@@ -1,18 +1,16 @@
 <script setup lang="ts">
 import { z } from "zod";
 import type { FormSubmitEvent } from "#ui/types";
-import { push, ref as dbRef, getDatabase, set } from "firebase/database";
+import { getDatabase, push, ref as dbRef, set } from "firebase/database";
+import Encryption from "~/utils/encryption";
 
 // ----- props -----
+const key = useCookie("key");
 const user = await getCurrentUser();
 const toast = useToast();
 const props = defineProps({
     item: {
-        type: {
-            id: String,
-            name: String,
-            phone: Number,
-        },
+        type: Object,
         required: false,
     },
 });
@@ -38,18 +36,24 @@ const open = ref(false);
  * insert new item
  * @param data
  */
-async function insert(data) {
-    return push(dbRef(database, `users/${user.uid}/contacts`), data);
+async function insert(data: any) {
+    return push(dbRef(database, `users/${user.uid}/contacts`), {
+        name: await Encryption.encrypt(key.value!!, data.name),
+        phone: await Encryption.encrypt(key.value!!, data.phone),
+    });
 }
 
 /**
  * update existing
  * @param data
  */
-async function edit(data) {
+async function edit(data: any) {
     return set(
-        dbRef(database, `users/${user.uid}/contacts/${props.item.id}`),
-        data,
+        dbRef(database, `users/${user.uid}/contacts/${props.item?.id}`),
+        {
+            name: await Encryption.encrypt(key.value!!, data.name),
+            phone: await Encryption.encrypt(key.value!!, data.phone),
+        },
     );
 }
 
@@ -61,16 +65,16 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
     loading.value = true;
 
     try {
-        if (props.item.id) await edit(event.data);
+        if (props.item?.id) await edit(event.data);
         else await insert(event.data);
 
         toast.add({
-            title: `Successfully ${props.item.id ? "updated" : "added"}`,
+            title: `Successfully ${props.item?.id ? "updated" : "added"}`,
         });
 
         // reset values (only if new)
         open.value = false;
-        if (!props.item.id) {
+        if (!props.item?.id) {
             state.name = undefined;
             state.phone = undefined;
         }
