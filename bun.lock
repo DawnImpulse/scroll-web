@@ -5,6 +5,7 @@
       "name": "nuxt-app",
       "dependencies": {
         "@lottiefiles/dotlottie-vue": "^0.6.1",
+        "@mryhryki/simple-encryption": "^0.1.4",
         "@nuxt/icon": "^1.11.0",
         "@nuxt/ui-pro": "^3.0.1",
         "firebase": "^11.5.0",
@@ -318,6 +319,8 @@
     "@lottiefiles/dotlottie-web": ["@lottiefiles/dotlottie-web@0.42.0", "", {}, "sha512-Zr2LCaOAoPCsdAQgeLyCSiQ1+xrAJtRCyuEYDj0qR5heUwpc+Pxbb88JyTVumcXFfKOBMOMmrlsTScLz2mrvQQ=="],
 
     "@mapbox/node-pre-gyp": ["@mapbox/node-pre-gyp@2.0.0", "", { "dependencies": { "consola": "^3.2.3", "detect-libc": "^2.0.0", "https-proxy-agent": "^7.0.5", "node-fetch": "^2.6.7", "nopt": "^8.0.0", "semver": "^7.5.3", "tar": "^7.4.0" }, "bin": { "node-pre-gyp": "bin/node-pre-gyp" } }, "sha512-llMXd39jtP0HpQLVI37Bf1m2ADlEb35GYSh1SDSLsBhR+5iCxiNGlT31yqbNtVHygHAtMy6dWFERpU2JgufhPg=="],
+
+    "@mryhryki/simple-encryption": ["@mryhryki/simple-encryption@0.1.4", "", {}, "sha512-EUw4M7D9zhwLMYjG5wJQCJ2ka7xapIZuU84TRE/saPUQqOaHHDjiLycMsSrFJTo8VH3G6FQGXDLHV1mQVN1/PQ=="],
 
     "@napi-rs/wasm-runtime": ["@napi-rs/wasm-runtime@0.2.7", "", { "dependencies": { "@emnapi/core": "^1.3.1", "@emnapi/runtime": "^1.3.1", "@tybys/wasm-util": "^0.9.0" } }, "sha512-5yximcFK5FNompXfJFoWanu5l8v1hNGqNHh9du1xETp9HWk/B/PzvchX55WYOPaIeNglG8++68AAiauBAtbnzw=="],
 
