@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.0.3](https://github.com/dawnimpulse/scroll-web/compare/v0.0.2...v0.0.3) (2025-04-05)
+
+
+### Features
+
+* **config:** replaced @nuxt/ui-pro with ui only ([a9ad6d4](https://github.com/dawnimpulse/scroll-web/commit/a9ad6d4a39b3ae81e4fb91a61eb227d6016cc763))
+* **docs:** license ([8933091](https://github.com/dawnimpulse/scroll-web/commit/8933091cd5428e7687ad8036a9e7838ada54a978))
+
 ## 0.0.2 (2025-04-05)
 
 
