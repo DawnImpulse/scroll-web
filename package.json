@@ -15,7 +15,7 @@
     "@lottiefiles/dotlottie-vue": "^0.6.1",
     "@mryhryki/simple-encryption": "^0.1.4",
     "@nuxt/icon": "^1.11.0",
-    "@nuxt/ui-pro": "^3.0.1",
+    "@nuxt/ui": "^3.0.1",
     "firebase": "^11.5.0",
     "nuxt": "^3.16.1",
     "nuxt-vuefire": "1.0.5",
