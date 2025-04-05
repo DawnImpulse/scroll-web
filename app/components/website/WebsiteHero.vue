@@ -70,7 +70,7 @@ onMounted(() => {
             <!--app-->
             <UButton
                 icon="material-symbols:app-badging"
-                @click="navigateTo('/app')"
+                @click="navigateTo('/app', { open: { target: '_blank' } })"
             >
                 Go to App
             </UButton>

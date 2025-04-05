@@ -129,7 +129,7 @@ const data = [
             <UButton
                 class="mt-24 px-16 py-4 rounded-xl shadow-2xl shadow-cyan-600"
                 color="primary"
-                @click="navigateTo('/app')"
+                @click="navigateTo('/app', { open: { target: '_blank' } })"
             >
                 Go to App
             </UButton>
