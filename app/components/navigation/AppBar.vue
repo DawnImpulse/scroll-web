@@ -53,6 +53,11 @@ function logout() {
                     <!--email-->
                     <div class="text-sm">{{ user.email }}</div>
 
+                    <!--help-->
+                    <a href="mailto:dawnimpulse@gmail.com" class="mt-4">
+                        <div class="text-sm underline">Help / Feedback</div>
+                    </a>
+
                     <!--logout-->
                     <UModal>
                         <UButton color="error" class="mt-4">Logout</UButton>
