@@ -101,7 +101,7 @@ const data = [
 
             <!--grid-->
             <div
-                class="mt-16 md:mt-24 lg:mt-36 px-4 md:px-16 gap-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4"
+                class="mt-16 md:mt-24 lg:mt-36 px-4 md:px-16 gap-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
             >
                 <div
                     :class="`bg-white h-48 px-4 py-4 rounded-2xl border-4 ${item.color.border}`"
