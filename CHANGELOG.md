@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.0.4](https://github.com/dawnimpulse/scroll-web/compare/v0.0.3...v0.0.4) (2025-04-19)
+
+
+### Features
+
+* **docs:** readme ([9bbc228](https://github.com/dawnimpulse/scroll-web/commit/9bbc228f42e38ef7a6fd3f1da875c15f7f3365b1))
+* **website:** websiteInfo - grid change for large ([5278b85](https://github.com/dawnimpulse/scroll-web/commit/5278b850a9dd4c8356915293efb098ad470ec76e))
+
 ## [0.0.3](https://github.com/dawnimpulse/scroll-web/compare/v0.0.2...v0.0.3) (2025-04-05)
 
 
