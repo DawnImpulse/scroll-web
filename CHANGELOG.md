@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.0.5](https://github.com/dawnimpulse/scroll-web/compare/v0.0.4...v0.0.5) (2025-04-21)
+
+
+### Features
+
+* seo handling ([9e862fa](https://github.com/dawnimpulse/scroll-web/commit/9e862fad11ac33da6362043b3f03c7894a97a35f))
+
 ## [0.0.4](https://github.com/dawnimpulse/scroll-web/compare/v0.0.3...v0.0.4) (2025-04-19)
 
 
