@@ -1,10 +1,33 @@
 <script setup lang="ts">
+import { signOut } from "firebase/auth";
+
+const auth = useFirebaseAuth();
 const emits = defineEmits(["resend"]);
 const disabled = ref(false);
+const toast = useToast();
 
 function resend() {
     emits("resend");
     disabled.value = true;
+}
+
+function logout() {
+    function logout() {
+        signOut(auth!!)
+            .then(() => {
+                toast.add({
+                    title: "Successfully logged out",
+                });
+                navigateTo("/app/auth/login");
+            })
+            .catch((error: any) => {
+                toast.add({
+                    title: "Something went wrong",
+                    description: error.toString(),
+                    color: "error",
+                });
+            });
+    }
 }
 </script>
 
@@ -23,7 +46,10 @@ function resend() {
         class="mt-8 animate-spin self-center text-(--ui-primary)"
         size="48"
     />
-    <div class="text-xs self-center">Reload page once verified</div>
+    <div class="text-xs self-center text-center">
+        Reloading page every 4 seconds<br />
+        to check verification
+    </div>
 
     <UButton
         @click="resend"
@@ -32,6 +58,15 @@ function resend() {
         :disabled="disabled"
     >
         Send Email Again
+    </UButton>
+
+    <UButton
+        @click="logout"
+        class="mt-4 self-center"
+        color="error"
+        variant="outline"
+    >
+        Sign Out
     </UButton>
 
     <!--logo-->
