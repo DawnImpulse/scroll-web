@@ -18,7 +18,10 @@ let user = await getCurrentUser();
 let verified = user?.emailVerified || false;
 if (user) {
     if (verified) await navigateTo("/app");
-    else layout.value = 1;
+    else {
+        layout.value = 1;
+        checkVerification();
+    }
 }
 
 /**
@@ -67,6 +70,7 @@ async function registerAndVerify(email: string, pin: string[]) {
 
         // send verification
         await sendVerificationEmail(user);
+        await checkVerification();
     } catch (error) {
         toast.add({
             title: "Something went wrong !!",
@@ -107,6 +111,35 @@ async function login(email: string, pin: string[]) {
         });
         loadingLogin.value = false;
     }
+}
+
+/**
+ * check if user is verified
+ */
+async function checkVerification() {
+    async function check() {
+        // check if logged in
+        if (auth?.currentUser) {
+            try {
+                // reload user
+                await auth.currentUser.reload();
+                // check verification
+                if (auth.currentUser.emailVerified) {
+                    // clear interval & navigate
+                    clearInterval(interval);
+                    await navigateTo("/app");
+                }
+            } catch (error) {
+                console.error("Error reloading user details:", error);
+            }
+        } else console.warn("No user is currently signed in.");
+    }
+
+    function hello() {
+        location.reload();
+    }
+
+    const interval = setInterval(hello, 4000);
 }
 </script>
 
