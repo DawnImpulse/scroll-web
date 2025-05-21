@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.0.4](https://github.com/dawnimpulse/scroll-web/compare/v0.0.3...v0.0.4) (2025-05-21)
+
+
+### Features
+
+* **auth:** verify - handling logout ([b84ad47](https://github.com/dawnimpulse/scroll-web/commit/b84ad477a74825d7a97b39276f92d9604fc95547))
+* **pages:** handling auto-reload for verification ([1b68657](https://github.com/dawnimpulse/scroll-web/commit/1b68657d99317ea789798369fe87b1197b16b302))
+
 ## [0.0.3](https://github.com/dawnimpulse/scroll-web/compare/v0.0.2...v0.0.3) (2025-04-05)
 
 
